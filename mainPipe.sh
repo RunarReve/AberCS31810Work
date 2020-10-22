@@ -13,9 +13,9 @@ do
 	python rmNewLine.py origin/${each} ${dir}/${each} 
 
 	#Makes a stat *.stat file with stats of the individual strand
-	python stats.py ${dir}/${each} ${dir}/${each}.stat
+	python stats.py ${dir}/${each} ${dir}/${dir}.stat
 
 	#Sum up the whole study/file
-	./filesum.sh ${dir} ${dir}/${dir}.sum 
+	python filesum.py ${dir}
 done
 

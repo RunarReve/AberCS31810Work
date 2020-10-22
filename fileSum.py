@@ -12,7 +12,7 @@ totC   = 0
 totG   = 0
 totT   = 0
 
-stat = study + '/' + study + '.fa.stat'
+stat = study + '/' + study + '.stat'
 for each in open(stat, 'r'):
     if(each[0] == '>'):
         totObj = totObj + 1
