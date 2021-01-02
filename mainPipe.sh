@@ -24,5 +24,12 @@ do
 	python kMers.py ${dir} 3
 	python kMers.py ${dir} 4
 
+	#Run NX for each study
+	touch ${dir}/${dir}.Nx
+	for N in 10 20 30 40 50 60 70 80 90
+	do
+		python3 NX.py ${dir} ${N} >> ${dir}/${dir}.Nx
+	done
+	exit
 done
 
