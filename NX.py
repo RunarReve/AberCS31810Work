@@ -33,4 +33,4 @@ while x > 0:
     x= x - contigs[index]
     index=index+1
 
-print("N"+str(N) +": "+ str(contigs[index-1]))
+print("N"+str(N) +"\t"+ str(contigs[index-1]))

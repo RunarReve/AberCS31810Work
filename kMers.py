@@ -1,4 +1,4 @@
-#
+# 
 #argv[1] study name
 #argv[2] Number of K-mers
 import sys
@@ -18,7 +18,6 @@ def getKList(k,word):
 
 k=int(sys.argv[2])
 kList= getKList(k, '').split(' ')
-print(len(kList))
 
 study = sys.argv[1]
 
