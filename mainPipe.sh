@@ -17,5 +17,12 @@ do
 
 	#Sum up the whole study/file
 	python filesum.py ${dir}
+
+	#Run K-mers with 1 to 4
+	python kMers.py ${dir} 1
+	python kMers.py ${dir} 2
+	python kMers.py ${dir} 3
+	python kMers.py ${dir} 4
+
 done
 
