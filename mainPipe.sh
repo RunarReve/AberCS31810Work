@@ -30,6 +30,6 @@ do
 	do
 		python3 NX.py ${dir} ${N} >> ${dir}/${dir}.Nx
 	done
-	exit
+
 done
 
