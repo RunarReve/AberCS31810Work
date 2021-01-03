@@ -2,6 +2,7 @@
 #argv[1] study name
 #argv[2] Number of K-mers
 import sys
+from operator import add
 
 #Function to create K-mers list
 def getKList(k,word):
@@ -16,16 +17,17 @@ def getKList(k,word):
     return lis[:-1]
 
 
+study = sys.argv[1]
 k=int(sys.argv[2])
 kList= getKList(k, '').split(' ')
-
-study = sys.argv[1]
 
 
 out = open(study + '/'+study+'.k'+str(k) , 'w')
 outNorm = open(study + '/'+study+'.k'+str(k)+'N' , 'w')
+outFull = open(study + '/'+study+'.k'+str(k)+'All' , 'w')
 
-
+totLength = 0
+scaffList = [0]*len(kList) #store all scaffolds at once
 for each in open(study+'/'+study+'.fa'):
     if (each[0] == '>'):
         out.write(each)
@@ -34,6 +36,8 @@ for each in open(study+'/'+study+'.fa'):
     lis = ''
     lisN = ''
     length = len(each)
+    totLength = totLength + length
+    
     for kk in kList:
         lis = lis  + str(each.count(kk)) +'\t'
         lisN = lisN  + format(each.count(kk)/float(length),'.2f') +'\t'
@@ -43,3 +47,11 @@ for each in open(study+'/'+study+'.fa'):
 
     outNorm.write('\t'.join(kList)+'\tLength\n')
     outNorm.write(lisN+' '+str(length)+'\n')
+
+    scaffList = map(add, scaffList, list(map(int, lis.split('\t')[:-1])))
+
+#Output the sum of all scaffolds
+scaffList2 = [format(x/float(totLength), '.2f') for x in scaffList]
+outFull.write('\t'.join(kList) + '\n')
+outFull.write('\t'.join(scaffList2) + '\n')
+
