@@ -46,12 +46,12 @@ if(len(codonList) == 1): #Simple fix if only one scaffold for calculations
 outfile = open(out, 'w')
 outfile.write(
     study + '\n'+
-    "Numb objects:\t" + str(totObj) +
+    "Numb scaffolds:\t" + str(totObj) +
     "\nTotal Lenght:\t" + str(totLen) +
-    "\nLongest Codon:\t" + str(max(codonList)) +
-    "\nShortest Codon:\t" + str(min(codonList)) +
+    "\nLongest:\t" + str(max(codonList)) +
+    "\nShortest:\t" + str(min(codonList)) +
     "\nAvrg length:\t" +  format(statistics.mean(codonList) , '.0f') +
-    "\nStd.Dev Codon:\t" +         format(statistics.stdev(codonList), '.0f') +
+    "\nStd.Dev:\t" +         format(statistics.stdev(codonList), '.0f') +
     "\nTotal A:\t" + str(totA) + 
     "\nTotal C:\t" + str(totC) + 
     "\nTotal G:\t" + str(totG) + 
