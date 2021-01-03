@@ -16,7 +16,8 @@ do
 	python stats.py ${dir}/${each} ${dir}/${dir}.stat
 
 	#Sum up the whole study/file
-	python filesum.py ${dir}
+	python3 filesum.py ${dir}
+
 
 	#Run K-mers with 1 to 4
 	python kMers.py ${dir} 1

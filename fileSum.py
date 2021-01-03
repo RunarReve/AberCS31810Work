@@ -1,6 +1,11 @@
 #
 #argv[1] study name 
+#TODO add longes contig
+#TODO add shortest contig 
+#TODO add standard deviation og GC-content 
+#TODO add Mean codon length 
 import sys
+import statistics
 
 study = sys.argv[1]
 out = study + '/' + study + '.sum' 
@@ -11,6 +16,7 @@ totA   = 0
 totC   = 0
 totG   = 0
 totT   = 0
+codonList = []
 
 stat = study + '/' + study + '.stat'
 for each in open(stat, 'r'):
@@ -19,6 +25,7 @@ for each in open(stat, 'r'):
         continue
     numb = each.split(': ')[-1].split(',')[0]
     if("Length:" in each):
+        codonList.append(int(numb))
         totLen = totLen + int(numb)
     elif("A:" in each):
         totA = totA + int(numb)  
@@ -32,15 +39,22 @@ for each in open(stat, 'r'):
 #GC-content 
 GC = format((totG + totC)/float(totLen)*100 ,'.2f')
 
+if(len(codonList) == 1): #Simple fix if only one scaffold for calculations
+    codonList.append(codonList[0])
+
 #Print all 
 outfile = open(out, 'w')
 outfile.write(
     study + '\n'+
-    "Number of objects: " + str(totObj) + '\n'+
-    "Total Lenght: " + str(totLen) + '\n'+
-    "Total A: " + str(totA) + '\n'+
-    "Total C: " + str(totC) + '\n'+
-    "Total G: " + str(totG) + '\n'+
-    "Total T: " + str(totT) + '\n'+
-    "GC-Content: " + str(GC) + '%\n'
+    "Numb objects:\t" + str(totObj) +
+    "\nTotal Lenght:\t" + str(totLen) +
+    "\nLongest Codon:\t" + str(max(codonList)) +
+    "\nShortest Codon:\t" + str(min(codonList)) +
+    "\nAvrg length:\t" +  format(statistics.mean(codonList) , '.0f') +
+    "\nStd.Dev Codon:\t" +         format(statistics.stdev(codonList), '.0f') +
+    "\nTotal A:\t" + str(totA) + 
+    "\nTotal C:\t" + str(totC) + 
+    "\nTotal G:\t" + str(totG) + 
+    "\nTotal T:\t" + str(totT) + 
+    "\nGC-Content:\t" +str(GC) + '%\n'
     )
