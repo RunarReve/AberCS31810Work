@@ -17,3 +17,5 @@ for each in open(inn, 'r'):
     else:
         string = string + each.replace('\n', '')
 
+outfile.write(string + '\n')
+
