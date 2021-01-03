@@ -42,4 +42,4 @@ for each in open(study+'/'+study+'.fa'):
     out.write(lis+'\n')
 
     outNorm.write('\t'.join(kList)+'\tLength\n')
-    outNorm.write(lis+' '+str(length)+'\n')
+    outNorm.write(lisN+' '+str(length)+'\n')
