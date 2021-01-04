@@ -1,4 +1,5 @@
 *.swp
+pearsonCorr.tsv
 RUG*/
 Bacillus*/
 Ecoli*/

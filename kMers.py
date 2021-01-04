@@ -22,9 +22,9 @@ k=int(sys.argv[2])
 kList= getKList(k, '').split(' ')
 
 
-out = open(study + '/'+study+'.k'+str(k) , 'w')
-outNorm = open(study + '/'+study+'.k'+str(k)+'N' , 'w')
-outFull = open(study + '/'+study+'.k'+str(k)+'All' , 'w')
+out = open(study + '/kmer/'+study+'.k'+str(k) , 'w')
+outNorm = open(study + '/kmer/'+study+'.k'+str(k)+'N' , 'w')
+outFull = open(study + '/kmer/'+study+'.k'+str(k)+'All' , 'w')
 
 totLength = 0
 scaffList = [0]*len(kList) #store all scaffolds at once

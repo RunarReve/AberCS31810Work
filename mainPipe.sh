@@ -3,6 +3,7 @@
 
 for each in $(ls origin/*.fa |sed -e 's/\// /g' | awk '{print $2}')
 do
+	break
 	#Make file locations
 	dir=$(echo "${each}" | sed -e 's/\./ /g' | awk '{print $1}' )
 	echo "${dir}"
@@ -20,11 +21,12 @@ do
 
 
 	#Run K-mers with 1 to 4
+	mkdir ${dir}/kmer/
 	mkdir ${dir}/plot/
 	for N in 1 2 3 4 
 	do
 		python kMers.py ${dir} ${N}
-		R/Kmers.R ${dir}/${dir}.k${N}All ${dir}/plot/${dir}.k${N}.png
+		R/Kmers.R ${dir}/kmer/${dir}.k${N}All ${dir}/plot/${dir}.k${N}.png
 	done
 
 	#Run NX for each study
@@ -36,3 +38,22 @@ do
 
 done
 
+
+#Spearman correlation on all
+echo "Study1_Study2	correlation	p-value" > pearsonCorr.tsv
+for each in $(ls origin/*.fa |sed -e 's/\// /g'|awk '{print $2}'|sed -e 's/.fa//g')
+do
+	echo "${each}"
+	for beach in $(ls origin/*.fa |sed -e 's/\// /g'|awk '{print $2}'|sed -e 's/.fa/ /g')
+	do
+		if [ "$each" = "$beach" ]
+		then
+			continue
+		fi
+		for N in 1 2 3 4
+		do
+			#TODO could be optimized by running a loop insitde the python program
+			python pearsonCorr.py ${each}/kmer/${each}.k${N}All ${beach}/kmer/${beach}.k${N}All pearsonCorr.tsv
+		done
+	done
+done
