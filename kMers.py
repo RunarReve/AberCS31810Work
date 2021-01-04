@@ -40,7 +40,7 @@ for each in open(study+'/'+study+'.fa'):
     
     for kk in kList:
         lis = lis  + str(each.count(kk)) +'\t'
-        lisN = lisN  + format(each.count(kk)/float(length),'.2f') +'\t'
+        lisN = lisN  + str(each.count(kk)/float(length)) +'\t'
 
     out.write('\t'.join(kList)+'\n')
     out.write(lis+'\n')
@@ -51,7 +51,7 @@ for each in open(study+'/'+study+'.fa'):
     scaffList = map(add, scaffList, list(map(int, lis.split('\t')[:-1])))
 
 #Output the sum of all scaffolds
-scaffList2 = [format(x/float(totLength), '.2f') for x in scaffList]
-outFull.write('\t'.join(kList) + '\n')
-outFull.write('\t'.join(scaffList2) + '\n')
+scaffList2 = [str(x/float(totLength)) for x in scaffList]
+for x in range(len(scaffList2)):
+    outFull.write(kList[x] + '\t' + scaffList2[x]+ '\n')
 

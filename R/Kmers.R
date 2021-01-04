@@ -1,17 +1,20 @@
+#!/usr/bin/env Rscript
 library(ggplot2)
 
+#Allow arguments
+args = commandArgs(trailingOnly=TRUE)
+
+inn <- args[1]
+out <- args[2]
+
 #Save as PNG
-png("rplot.png")
+png(args[2])
 
 #Load in the data
-df <- data.frame(dose=c("D0.5", "D1", "D2"), len=c(4.2, 10, 29.5))
+data <- read.table(file = args[1], sep = '\t', header = FALSE)
+names(data) <- c('Kmers','Frequency')
 
-
-#Plor the Plot
-p<-ggplot(data=df, aes(x=dose, y=len)) +
-  	geom_bar(stat="identity", fill="darkgray", width=0.5)+
-    theme_minimal()
-
-
-p
+#Plot the plot
+ggplot(data, aes(x=Kmers, y=Frequency)) + 
+	  geom_bar(stat = "identity", fill="darkgray",  width=0.5) 
 

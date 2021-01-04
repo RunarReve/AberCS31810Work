@@ -20,10 +20,12 @@ do
 
 
 	#Run K-mers with 1 to 4
-	python kMers.py ${dir} 1
-	python kMers.py ${dir} 2
-	python kMers.py ${dir} 3
-	python kMers.py ${dir} 4
+	mkdir ${dir}/plot/
+	for N in 1 2 3 4 
+	do
+		python kMers.py ${dir} ${N}
+		R/Kmers.R ${dir}/${dir}.k${N}All ${dir}/plot/${dir}.k${N}.png
+	done
 
 	#Run NX for each study
 	touch ${dir}/${dir}.Nx
