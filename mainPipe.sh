@@ -3,7 +3,7 @@
 
 for each in $(ls origin/*.fa |sed -e 's/\// /g' | awk '{print $2}')
 do
-	break
+	#break
 	#Make file locations
 	dir=$(echo "${each}" | sed -e 's/\./ /g' | awk '{print $1}' )
 	echo "${dir}"
@@ -57,3 +57,6 @@ do
 		done
 	done
 done
+sort -gk2r pearsonCorr.tsv > pearsonCorr2.tsv
+mv pearsonCorr2.tsv pearsonCorr.tsv
+
