@@ -26,7 +26,7 @@ do
 	for N in 1 2 3 4 
 	do
 		python kMers.py ${dir} ${N}
-		R/Kmers.R ${dir}/kmer/${dir}.k${N}All ${dir}/plot/${dir}.k${N}.png
+		R/Kmers.R ${dir}/kmer/${dir}.k${N}All ${dir}/plot/${dir}.k${N}.png "${dir} K${N}"
 	done
 
 	#Run NX for each study
