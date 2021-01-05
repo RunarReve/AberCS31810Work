@@ -31,7 +31,7 @@ do
 
 	#Run NX for each study
 	touch ${dir}/${dir}.Nx
-	for N in 10 20 30 40 50 60 70 80 90
+	for N in 10 25 33 50 66 75 90
 	do
 		python3 NX.py ${dir} ${N} >> ${dir}/${dir}.Nx
 	done
