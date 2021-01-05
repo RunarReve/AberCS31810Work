@@ -28,6 +28,7 @@ do
 		python kMers.py ${dir} ${N}
 		R/Kmers.R ${dir}/kmer/${dir}.k${N}All ${dir}/plot/${dir}.k${N}.png
 	done
+	exit
 
 	#Run NX for each study
 	touch ${dir}/${dir}.Nx

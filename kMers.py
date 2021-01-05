@@ -26,8 +26,8 @@ out = open(study + '/kmer/'+study+'.k'+str(k) , 'w')
 outNorm = open(study + '/kmer/'+study+'.k'+str(k)+'N' , 'w')
 outFull = open(study + '/kmer/'+study+'.k'+str(k)+'All' , 'w')
 
-totLength = 0
 scaffList = [0]*len(kList) #store all scaffolds at once
+ksumsum = 0
 for each in open(study+'/'+study+'.fa'):
     if (each[0] == '>'):
         out.write(each)
@@ -35,23 +35,25 @@ for each in open(study+'/'+study+'.fa'):
         continue
     lis = ''
     lisN = ''
-    length = len(each)
-    totLength = totLength + length
+    kSum = 0 #The sum off all ks found
     
     for kk in kList:
-        lis = lis  + str(each.count(kk)) +'\t'
-        lisN = lisN  + str(each.count(kk)/float(length)) +'\t'
+        lis  = lis  + str(each.count(kk)) +'\t'
+        kSum = kSum + each.count(kk)
+
+    lisN = [str(int(x)/float(kSum)) for x in lis[:-1].split('\t')]
 
     out.write('\t'.join(kList)+'\n')
     out.write(lis+'\n')
 
-    outNorm.write('\t'.join(kList)+'\tLength\n')
-    outNorm.write(lisN+' '+str(length)+'\n')
+    outNorm.write('\t'.join(kList)+'\tKmerCount\n')
+    outNorm.write('\t'.join(lisN) +'\t' + str(kSum)+'\n')
 
+    ksumsum = ksumsum + kSum
     scaffList = map(add, scaffList, list(map(int, lis.split('\t')[:-1])))
 
 #Output the sum of all scaffolds
-scaffList2 = [str(x/float(totLength)) for x in scaffList]
+scaffList2 = [str(x/float(ksumsum)) for x in scaffList]
 for x in range(len(scaffList2)):
     outFull.write(kList[x] + '\t' + scaffList2[x]+ '\n')
 
