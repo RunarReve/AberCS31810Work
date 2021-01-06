@@ -2,7 +2,7 @@
 #This is the main pipeline that starts all the scripts and programs for this project
 
 #Change list for k in k-mers
-numbN="1 2 3 4 5"
+numbN="1 2 3 4"
 
 for each in $(ls origin/*.fa |sed -e 's/\// /g' | awk '{print $2}')
 do
