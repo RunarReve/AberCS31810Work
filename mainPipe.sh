@@ -1,9 +1,12 @@
 #!/bin/bash
 #This is the main pipeline that starts all the scripts and programs for this project
 
+#Change list for k in k-mers
+numbN="1 2 3 4 5"
+
 for each in $(ls origin/*.fa |sed -e 's/\// /g' | awk '{print $2}')
 do
-	#break
+	break
 	#Make file locations
 	dir=$(echo "${each}" | sed -e 's/\./ /g' | awk '{print $1}' )
 	echo "${dir}"
@@ -23,8 +26,9 @@ do
 	#Run K-mers with 1 to 4
 	mkdir ${dir}/kmer/
 	mkdir ${dir}/plot/
-	for N in 1 2 3 4 
+	for N in ${numbN}
 	do
+		echo "${N}"
 		python kMers.py ${dir} ${N}
 		R/Kmers.R ${dir}/kmer/${dir}.k${N}All ${dir}/plot/${dir}.k${N}.png "${dir} K${N}"
 	done
@@ -50,8 +54,9 @@ do
 		then
 			continue
 		fi
-		for N in 1 2 3 4
+		for N in ${numbN}
 		do
+			echo "${N}"
 			#TODO could be optimized by running a loop insitde the python program
 			python pearsonCorr.py ${each}/kmer/${each}.k${N}All ${beach}/kmer/${beach}.k${N}All pearsonCorr.tsv
 		done
