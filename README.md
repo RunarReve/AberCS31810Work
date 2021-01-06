@@ -17,3 +17,6 @@ Python2(mainly) & 3(for NX.py):
 		operator
 R:
 	ggplot2
+
+Pipeline will generate a directory for each study and containing data generated for it.
+To plots will be available under each study.
